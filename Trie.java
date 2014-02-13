@@ -25,7 +25,6 @@ public class Trie {
 	public Trie(String filename) {
 		root = new TrieNode();
 		int wordCount = 0;
-
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filename));
 			String word;
@@ -35,7 +34,7 @@ public class Trie {
 			}
 			in.close();
 		} catch (Exception e) {
-
+			System.err.println("Error initializing trie from file");
 		}
 		System.out.println(wordCount + " words scanned into trie");
 	}
@@ -77,7 +76,18 @@ public class Trie {
 	 * @return
 	 */
 	public boolean findWord(String word) {
-		return root.findWord(word, 0, word.length());
+		TrieNode curr = root;
+		for (int i = 0; i < word.length(); i++) {
+			curr = curr.findChild(word.charAt(i));
+			if (curr == null) {
+				return false;
+			}
+			
+		}
+		if (curr.getIsWord() != null && curr.getIsWord().equals(word)) {
+			return true;
+		}
+		return false;
 	}
 
 	public TrieNode getRoot() {

@@ -30,27 +30,40 @@ public class TrieNode {
 	}
 
 	/***
-	 * Add the letter as the node's child
+	 * Add the given letter as the node's child
 	 * 
-	 * Given the input, check the children if there is already node with the
-	 * character. If node already exists and return it. Otherwise create a new
-	 * node.
+	 * If there already exists a node with the letter, it is return. Otherwise, a
+	 * new node is created and returned.
 	 * 
 	 * @param letter
-	 *            - char to add to node's children
 	 * @return
 	 */
 	public TrieNode addChild(char letter) {
+		TrieNode temp = findChild(letter);
+		if (temp == null) {
+			temp = new TrieNode(letter);
+			this.children.add(temp);
+		}
+
+		return temp;
+	}
+
+	/***
+	 * Find the child node that matches the letter
+	 * 
+	 * Will return the node or null
+	 * 
+	 * @param letter
+	 * @return
+	 */
+	public TrieNode findChild(char letter) {
 		for (TrieNode node : this.children) {
 			if (letter == node.letter) {
 				return node;
 			}
 		}
 
-		TrieNode temp = new TrieNode(letter);
-		this.children.add(temp);
-
-		return temp;
+		return null;
 	}
 
 	/***

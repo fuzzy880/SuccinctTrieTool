@@ -35,15 +35,5 @@ public class SuccinctTrieTest {
 			System.err.println("Error reading from file");
 		}
 	}
-	
-	@Test
-	public void testWriteNodeDataToFile() {
-		
-	}
-	
-	@Test
-	public void testWriteTrieBitsToFile() {
-		
-	}
 
 }
